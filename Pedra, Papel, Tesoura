@@ -1,0 +1,46 @@
+import random
+
+# Define as opções de jogada
+options = ("pedra", "papel", "tesoura")
+
+# Pede a jogada do jogador e valida a entrada
+def player_choice():
+    choice = input("Escolha sua jogada (pedra, papel ou tesoura): ").lower()
+    if choice in options:
+        return choice
+    else:
+        print("Jogada inválida. Escolha entre pedra, papel ou tesoura.")
+        return player_choice()
+
+# Gera uma jogada aleatória para o computador
+def computer_choice():
+    return random.choice(options)
+
+# Determina o vencedor da rodada
+def determine_winner(player, computer):
+    if player == computer:
+        return "Empate"
+    elif player == "pedra" and computer == "tesoura":
+        return "Jogador vence"
+    elif player == "papel" and computer == "pedra":
+        return "Jogador vence"
+    elif player == "tesoura" and computer == "papel":
+        return "Jogador vence"
+    else:
+        return "Computador vence"
+
+# Inicia o jogo
+player_score = 0
+computer_score = 0
+
+while True:
+    player = player_choice()
+    computer = computer_choice()
+    winner = determine_winner(player, computer)
+    print(f"Jogador: {player} | Computador: {computer}")
+    print(f"Resultado: {winner}")
+    if winner == "Jogador vence":
+        player_score += 1
+    elif winner == "Computador vence":
+        computer_score += 1
+    print(f"Placar: Jogador {player_score} x {computer_score} Computador")
